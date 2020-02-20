@@ -19,6 +19,7 @@ pizzaJson.map((item, index)=>{
 
 
       c('.pizzaWindowArea').style.opacity = 0;
+
       c('.pizzaWindowArea').style.display = 'flex';
       setTimeout(()=>{
          c('.pizzaWindowArea').style.opacity = 1;

@@ -25,7 +25,7 @@ pizzaJson.map((item, index)=>{
             size.classList.add('selected');
          }
          size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
-      })
+      });
       c('.pizzaInfo--qt').innerHTML = modalQt;
       c('.pizzaWindowArea').style.opacity = 0;
       c('.pizzaWindowArea').style.display = 'flex';
@@ -43,6 +43,29 @@ function closeModal(){
       c('.pizzaWindowArea').style.display = 'none';
    }, 500);
 }
+    //fechar modal ao cancelar
 cs('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach((item)=>{
    item.addEventListener('click',closeModal);
+});
+    //fechar modal ao clicar fora dele
+c('.pizzaWindowArea').addEventListener('click',function(e){
+  if(e.target == this) closeModal();
+});
+    //ação da quantidade
+c('.pizzaInfo--qtmenos').addEventListener('click', ()=>{
+    if(modalQt > 1) {
+        modalQt--;
+        c('.pizzaInfo--qt').innerHTML = modalQt;
+    }
+});
+c('.pizzaInfo--qtmais').addEventListener('click', ()=>{
+    modalQt++;
+    c('.pizzaInfo--qt').innerHTML = modalQt;
+});
+    //selecionando tamanhos
+cs('.pizzaInfo--size').forEach((size, sizeIndex)=>{
+    size.addEventListener('click', ()=>{
+        c('.pizzaInfo--size.selected').classList.remove('selected');
+        size.classList.add('selected');
+    });
 });

@@ -1,9 +1,11 @@
 let cart = [];
 let modalQt = 1;
-let modalKey =0;
+let modalKey = 0;
+
 
 const c = (el)=>document.querySelector(el);
 const cs = (el)=>document.querySelectorAll(el);
+let atualPrice = 0;
 
 // Listagem das pizzas
 pizzaJson.map((item, index)=>{
@@ -19,11 +21,11 @@ pizzaJson.map((item, index)=>{
       let key = e.target.closest('.pizza-item').getAttribute('data-key');
       modalQt = 1;
       modalKey = key;
-
       c('.pizzaBig img').src = pizzaJson[key].img;
       c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
       c('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
       c('.pizzaInfo--actualPrice').innerHTML = pizzaJson[key].price;
+       atualPrice = c('.pizzaInfo--actualPrice').innerHTML;
       c('.pizzaInfo--size.selected').classList.remove('selected');
       cs('.pizzaInfo--size').forEach((size, sizeIndex)=>{
          if(sizeIndex == 2) {
@@ -62,10 +64,14 @@ c('.pizzaInfo--qtmenos').addEventListener('click', ()=>{
         modalQt--;
         c('.pizzaInfo--qt').innerHTML = modalQt;
     }
+    totalModal =  atualPrice * modalQt;
+    c('.pizzaInfo--actualPrice').innerHTML = totalModal.toFixed(2);
 });
 c('.pizzaInfo--qtmais').addEventListener('click', ()=>{
     modalQt++;
     c('.pizzaInfo--qt').innerHTML = modalQt;
+    totalModal =  atualPrice * modalQt;
+    c('.pizzaInfo--actualPrice').innerHTML = totalModal.toFixed(2);
 });
     //selecionando tamanhos
 cs('.pizzaInfo--size').forEach((size, sizeIndex)=>{

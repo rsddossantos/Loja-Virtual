@@ -80,7 +80,7 @@ cs('.pizzaInfo--size').forEach((size, sizeIndex)=>{
         size.classList.add('selected');
     });
 });
-    //carrinho
+    //carrinho desktop
 c('.pizzaInfo--addButton').addEventListener('click', ()=>{
     let size = parseInt(c('.pizzaInfo--size.selected').getAttribute('data-key'));
     // Criando identificador para agrupar mesma pizza e tamanho.
@@ -100,9 +100,20 @@ c('.pizzaInfo--addButton').addEventListener('click', ()=>{
     updateCart();
     closeModal();
 });
+    //carrinho mobile
+c('.menu-openner').addEventListener('click', () =>{
+   if(cart.length >0){
+       c('aside').style.left = '0';
+   }
+});
+    //fechar carrinho mobile
+c('.menu-closer').addEventListener('click', () =>{
+   c('aside').style.left  = '100vw';
+});
 
 // Exibição carrinho de compras
 function updateCart() {
+    c('.menu-openner span').innerHTML = cart.length;
     if(cart.length > 0) {
         c('aside').classList.add('show');
         c('.cart').innerHTML = '';
@@ -154,6 +165,7 @@ function updateCart() {
         c('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
     } else{
         c('aside').classList.remove('show');
+        c('aside').style.left = '100vw';
     }
 }
 
